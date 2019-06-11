@@ -6,8 +6,8 @@ FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
 COPY ["frontend/Frontend.csproj", "frontend/"]
 RUN dotnet restore "frontend/Frontend.csproj"
-WORKDIR "/src/frontend"
 COPY . .
+WORKDIR "/src/frontend"
 RUN dotnet build "Frontend.csproj" -c Release -o /app
 
 FROM build AS publish
