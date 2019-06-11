@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=development --watch",
-    "release": "webpack --mode=production",
+    "release": "webpack --mode=development",
     "publish": "npm run release && dotnet publish -c Release"
   },
   "keywords": [],
