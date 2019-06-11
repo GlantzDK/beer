@@ -1,0 +1,17 @@
+﻿body {
+    background: #333333;
+}
+
+/*.overlay {
+    position: absolute;
+    background-color: #FFFFFF;
+    top: 50%;
+    height: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+
+}*/
+
+.selected {
+    color: orange;
+}

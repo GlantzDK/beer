@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-light bg-light">
+        <button class="btn btn-dark" data-bind="click:showFavourites">My favourites <span class="fa fa-star selected"></span></button>
+        <button class="btn btn-dark" data-bind="click:showAll">All beers</button>
+        <button class="btn btn-dark" data-bind="click:enableSearch">Search</button>
+    </nav>
+    <!-- ko if: searchEnabled -->
+    <div class="container">
+        <div class="row">
+            <div class="card w-100 mt-3">
+                <div class="card-header">Search</div>
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" data-bind="value: $root.searchTerm, valueUpdate: 'afterkeydown'" >
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="container">
+        <div class="row">
+            <!-- ko foreach: beers-->
+            <div class="card border-dark m-2" style="max-width: 10rem; max-height: 24rem; overflow: hidden;" data-toggle="modal" data-target="#exampleModal" data-bind="click:$root.showBeer">
+
+                <div class="card-header">
+                    <div class="float-right fa fa-star" style="font-size: 1.6rem;" data-bind="click:$root.markFavourite, clickBubble: false, css:{selected:$root.isFavourite($data)}"></div>
+                    <div data-bind="text:name"></div>
+
+                </div>
+                <div class="card-body align-items-center">
+                    <img class="img-fluid" data-bind="attr:{src: image_url}">
+                </div>
+            </div>
+
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" data-bind="with:selectedBeer">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <span data-bind="text:name"></span>
+                        <!-- ko if:$root.isFavourite($data) -->
+                        <span class="badge badge-secondary" data-bind="click:$root.markFavourite.bind($data)">Favourite <span class="fa fa-star selected"></span></span>
+                        <!-- /ko -->
+                    </h5>
+                </div>
+                <div class="modal-body">
+
+                    <div class="float-left p-3">
+                        <img class="img-fluid" style="max-width: 6rem;" data-bind="attr:{src: image_url}" />
+                    </div>
+                    <table class="table table-borderless w-50">
+                        <tr>
+                            <td>Alc</td>
+                            <td><span data-bind="text:abv"></span>%</td>
+                        </tr>
+                        <tr>
+                            <td>IBU</td>
+                            <td data-bind="text:ibu"></td>
+                        </tr>
+                    </table>
+                    <div class="p-3" data-bind="text:description">
+                    </div>
+
+                    <!-- ko ifnot: $root.isFavourite($data) -->
+                    <div data-bind="click:$root.markFavourite.bind($data)">
+                        <span class="badge badge-secondary">Mark as favourite <span class="fa fa-star"></span></span>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
