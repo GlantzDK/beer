@@ -25,7 +25,7 @@ namespace frontend
                 app.UseDeveloperExceptionPage();
             }
 
-
+            app.UsePathBase("/beer");
             app.UseDefaultFiles();
             app.UseStaticFiles();
         }
